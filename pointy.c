@@ -10,40 +10,34 @@
 
    Use your pointer to print out each individual byte of your int.
 
-    The formatting character for a single byte in hex is %hhx, that is half of
-        half of an integer.
+    The formatting character for a single byte in hex is %hhx, that is half of half of an integer.
 
-   Using your pointer, modify the individual bytes of your int and print out the
-   resulting value in hex and decimal after each modification.
+   Using your pointer, modify the individual bytes of your int and print out the resulting value in hex and decimal after each modification.
 
     Increment each byte by 1
     Increment each byte by 16
  */
 
 #include <stdio.h>
+unsigned int x = 3216549870;
+char * c = &x;
+int i;
 int main() {
-	unsigned int x = 3216549870;
-	char * c = &x;
-	int i;
-	printf("int: %u \n", x);
-	printf("hex version: %x \n", x);
-	printf("pointer in hex: %x \n", c);
-	printf("\nbyte values of int \n");
-	for(i = 0 ; i < sizeof(x) ; i++)
+	printf("byte values of x \n");
+  for(i = sizeof(x) - 1 ; i >= 0 ; i--)
 		printf("byte %d: %hhx   ", i, *(c + i));
-	printf("\n\nbyte values after incrementing by each byte 1\n");
-	for(i = 0 ; i < sizeof(x) ; i++) {
-		*(c + i) += 1;
-		printf("byte %d: %hhx   ", i, *(c + i));
-	}
-	printf("\ndec value after incrementing each byte by 1: %u \n", x);
-	printf("hex value after incrementing each byte by 1: %x \n", x);
-	printf("\nbyte values after incrementing by each byte 16\n");
-	for(i = 0 ; i < sizeof(x) ; i++) {
-		*(c + i) += 16;
-		printf("byte %d: %hhx   ", i, *(c + i));
-	}
-	printf("\ndec value after incrementing each byte by 16: %u \n", x);
-	printf("hex value after incrementing each byte by 16: %x \n", x);
+	printf("\npointer in hex: %0x \n", c);
+	printf("dec value: %u \nhex value: %x \n", x, x);
 
+	printf("\nbyte values after incrementing by each byte 1\n");
+	for(i = sizeof(x) - 1 ; i >= 0 ; i--) 
+		printf("byte %d: %hhx   ", i, ++*(c + i));
+	printf("\npointer in hex: %0x \n", c);
+	printf("dec value: %u \nhex value: %x \n", x, x);
+
+	printf("\nbyte values after incrementing by each byte 16\n");
+	for(i = sizeof(x) - 1 ; i >= 0 ; i--)
+		printf("byte %d: %hhx   ", i, *(c + i) += 16);
+	printf("\npointer in hex: %0x \n", c);
+	printf("dec value: %u \nhex value: %x \n", x, x);
 }
